@@ -1,5 +1,6 @@
 package com.vahabvahabov.PDFTextSearch.config;
 
+import io.micrometer.common.lang.NonNullApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
@@ -13,6 +14,6 @@ public class ElasticSearchConfig  extends ElasticsearchConfiguration {
 
     @Override
     public ClientConfiguration clientConfiguration() {
-        return ClientConfiguration.builder().connectedTo(elasticSearchUrl).build();
+        return ClientConfiguration.builder().connectedTo(elasticSearchUrl.replace("http://", "").replace("https://", "")).build();
     }
 }

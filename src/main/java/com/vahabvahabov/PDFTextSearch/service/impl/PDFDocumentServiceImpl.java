@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.StreamSupport;
 
 @Service
 public class PDFDocumentServiceImpl implements PDFDocumentService {
@@ -63,17 +64,17 @@ public class PDFDocumentServiceImpl implements PDFDocumentService {
     }
 
     @Override
-    public List<PDFDocument> findByFilename(String fileName) {
-        return pdfDocumentRepository.findFileNameContaining(fileName);
+    public List<PDFDocument> findByFilename(String filename) {
+        return pdfDocumentRepository.findByFilenameContaining(filename);
     }
 
     @Override
-    public Optional<PDFDocument> findPdfById(Long id) {
+    public Optional<PDFDocument> findPdfById(String id) {
         return pdfDocumentRepository.findById(id);
     }
 
     @Override
-    public void deleteDocument(Long id) throws IOException {
+    public void deleteDocument(String  id) throws IOException {
         Optional<PDFDocument> optional = pdfDocumentRepository.findById(id);
 
         if (optional.isPresent()) {
@@ -85,6 +86,8 @@ public class PDFDocumentServiceImpl implements PDFDocumentService {
 
     @Override
     public List<PDFDocument> findAll() {
-        return (List<PDFDocument>) pdfDocumentRepository.findAll();
+        Iterable<PDFDocument> documents = pdfDocumentRepository.findAll();
+        return StreamSupport.stream(documents.spliterator(), false)
+                .collect(java.util.stream.Collectors.toList());
     }
 }

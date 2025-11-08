@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
-    @Value("${spring.upload-dir}")
+    @Value("${file.upload-dir}")
     private String uploadDir;
 
 

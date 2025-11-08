@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Document(indexName = "pdf_document")
@@ -13,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PDFDocument {
     @Id
-    private Long id;
+    private String id;
 
     private String filename;
 
@@ -21,7 +25,8 @@ public class PDFDocument {
 
     private String filePath;
 
-    private LocalDateTime uploadDate;
+    @Field(type = FieldType.Date, format = DateFormat.epoch_millis)
+    private Instant uploadDate;
     private Long fileSize;
 
     public PDFDocument(String filename, String content, String filePath, Long fileSize) {
@@ -29,7 +34,7 @@ public class PDFDocument {
         this.content = content;
         this.filePath = filePath;
         this.fileSize = fileSize;
-        this.uploadDate = LocalDateTime.now();
+        this.uploadDate = Instant.now();
     }
 
 }

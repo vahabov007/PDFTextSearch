@@ -18,7 +18,6 @@ public class PDFTextExtractServiceImpl implements PDFTextExtractService {
         tika.setMaxStringLength(100 * 1024 * 1024);
     }
 
-
     @Override
     public String extractTextFromPdf(MultipartFile file) throws IOException, TikaException {
         if (!isPdfFile(file)) {

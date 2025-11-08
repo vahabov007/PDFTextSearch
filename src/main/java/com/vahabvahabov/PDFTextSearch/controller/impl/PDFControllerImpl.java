@@ -87,7 +87,7 @@ public class PDFControllerImpl implements PDFController {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<PDFDocument> getDocument(@PathVariable Long id) {
+    public ResponseEntity<PDFDocument> getDocument(@PathVariable String id) {
         return pdfDocumentService.findPdfById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -102,7 +102,7 @@ public class PDFControllerImpl implements PDFController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteDocument(@PathVariable Long id) {
+    public ResponseEntity<?> deleteDocument(@PathVariable String id) {
         try {
             pdfDocumentService.deleteDocument(id);
             return ResponseEntity.ok("Document deleted successfully");
@@ -120,11 +120,11 @@ public class PDFControllerImpl implements PDFController {
         return response;
     }
 
-    private Map<String, Object> successDetailedResponse(String message,  Long id, String fileName) {
+    private Map<String, Object> successDetailedResponse(String message,  String id, String filename) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", message);
         response.put("documentId", id);
-        response.put("fileName", fileName);
+        response.put("filename", filename);
 
         return response;
     }

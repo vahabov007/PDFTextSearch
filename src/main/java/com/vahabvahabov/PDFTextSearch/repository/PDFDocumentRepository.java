@@ -10,10 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PDFDocumentRepository extends ElasticsearchRepository<PDFDocument, Long> {
+public interface PDFDocumentRepository extends ElasticsearchRepository<PDFDocument, String> {
 
-    List<PDFDocument> findFileNameContaining(String fileName);
+    List<PDFDocument> findByFilenameContaining(String filename);
 
     @Query("{\"multi_match\": {\"query\": \"?0\", \"fields\": [\"content\", \"filename\"]}}")
     Page<PDFDocument> findByContentContaining(String query, Pageable pageable);
+
+
 }

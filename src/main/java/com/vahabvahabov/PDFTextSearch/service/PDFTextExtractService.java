@@ -9,7 +9,6 @@ import java.io.InputStream;
 public interface PDFTextExtractService {
 
     public String extractTextFromPdf(MultipartFile file) throws IOException, TikaException;
-
     public String extractTextFromPdf(InputStream inputStream) throws IOException, TikaException;
 
 }

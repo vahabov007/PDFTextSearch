@@ -25,9 +25,9 @@ public interface PDFController {
 
     public ResponseEntity<List<PDFDocument>> getAllDocuments();
 
-    public ResponseEntity<?> deleteDocument(Long id);
+    public ResponseEntity<?> deleteDocument(String id);
 
-    public ResponseEntity<PDFDocument> getDocument(Long id);
+    public ResponseEntity<PDFDocument> getDocument(String  id);
 
 
 }

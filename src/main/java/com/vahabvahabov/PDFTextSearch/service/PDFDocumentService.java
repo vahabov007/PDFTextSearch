@@ -19,11 +19,11 @@ public interface PDFDocumentService {
 
     public Page<PDFDocument> searchByContent(String query, Pageable pageable);
 
-    public List<PDFDocument> findByFilename(String fileName);
+    public List<PDFDocument> findByFilename(String filename);
 
-    public Optional<PDFDocument> findPdfById(Long id);
+    public Optional<PDFDocument> findPdfById(String id);
 
-    public void deleteDocument(Long id) throws IOException;
+    public void deleteDocument(String id) throws IOException;
 
     public List<PDFDocument> findAll();
 
